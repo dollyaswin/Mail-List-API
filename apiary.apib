@@ -1,0 +1,59 @@
+FORMAT: 1A
+HOST: https://api.mail-list.com/
+
+# Mail-List.com API
+
+Add, Change or Delete your members from your mailing list(s) at Mail-List.com
+
+Version 1 acts against just one mailing list, and uses the list name and password as authetication.
+
+All commands include these headers
+
+   + Headers
+
+        x-mail-list-version: 1
+        x-mail-list-list-name: example-list
+        x-mail-list-password: 12345
+
+Version 2 acts against all mailing lists for a given client, and uses an API key as authentication.
+
+## Members Collection [/members]
+
+### List All Members [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "email_address":
+                  [
+                      "joe@gmail.com",
+                      "sally@outlook.com",
+                      "bob@yahoo.com"
+                  ]
+            }
+        ]
+
+### Check For Specific Member [GET] /joe@gmail.com
+
++ Response 204
++ Response 404
+
+### Delete a Member [DELETE] /joe@gmail.com
+
++ Response 204
++ Response 404
+
+### Add a New Member [POST] /joe@gmail.com
+
++ Response 204
+
+### Change a Member to a different email address [PUT] /joe@gmail.com
+    + Body
+
+            {
+                "new_email_address": "joe@aol.com"
+             }
+
++ Response 204
++ Response 404
