@@ -1,8 +1,7 @@
 FORMAT: 1A
-HOST: https://api.mail-list.com/
+HOST: https://api.mail-list.com
 
 # Mail-List.com API
-
 Add, Change or Delete your members from your mailing list(s) at Mail-List.com
 
 Version 1 acts against just one mailing list, and uses the list name and password as authetication.
@@ -20,9 +19,7 @@ Version 2 acts against all mailing lists for a given client, and uses an API key
 # Group Members of one particular Mailing List
 
 ## Members Collection [/members]
-
 ### List All Members [GET]
-
 + Response 200 (application/json)
 
         [
@@ -36,26 +33,40 @@ Version 2 acts against all mailing lists for a given client, and uses an API key
             }
         ]
 
-### Check For Specific Member [GET] /joe@gmail.com
 
-+ Response 204
-+ Response 404
+# Group Member of particular Mailing List
+## Member Entity [/member/{?email_address}]
+### Check For Specific Member [GET]
++ Parameters
+    + email_address: joe%40gmail.com (string) - An email address for identifier
++ Response 200 (application/json)
 
-### Delete a Member [DELETE] /joe@gmail.com
+        {
+            "email_address": "joe@gmail.com"
+        }
 
-+ Response 204
-+ Response 404
 
-### Add a New Member [POST] /joe@gmail.com
+### Delete a Member [DELETE]
++ Request (application/json)
++ Parameters
+    + email_address: joe%40gmail.com (string) - An email address for identifier
++ Response 200
 
-+ Response 204
+### Add a New Member [POST]
++ Request (application/json)
 
-### Change a Member to a different email address [PUT] /joe@gmail.com
-    + Body
+        { "email_address": "joe@gmail.com" }
 
-            {
-                "new_email_address": "joe@aol.com"
-             }
++ Response 201
 
-+ Response 204
-+ Response 404
+
+### Change a Member to a different email address [PUT]
++ Request (application/json)
+
+        { "email_address": "joe@aol.com" }
+    
++ Response 200 (application/json)
+
+        {
+            "email_address": "joe@aol.com"
+        }
